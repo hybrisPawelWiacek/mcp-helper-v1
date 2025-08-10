@@ -120,7 +120,7 @@ export class CommandRouter {
 \x1b[33mOptions:\x1b[0m
   --help, -h    Show help for a specific command
 
-\x1b[90mFor more information, visit: https://github.com/hybrisPawelWiacek/mcp-helper\x1b[0m
+\x1b[90mFor more information, visit: https://github.com/hybrisPawelWiacek/mcp-helper-v1\x1b[0m
 `);
   }
 }

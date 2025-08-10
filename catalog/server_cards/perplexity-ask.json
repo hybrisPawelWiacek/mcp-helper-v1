@@ -1,0 +1,118 @@
+{
+  "id": "perplexity-ask",
+  "name": "Perplexity Ask MCP Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "node",
+  "deploy": {
+    "kind": "npx",
+    "command": "npx",
+    "args": ["-y", "server-perplexity-ask"]
+  },
+  "envSchema": [
+    {
+      "name": "PERPLEXITY_API_KEY",
+      "description": "Perplexity API key for accessing the Sonar API",
+      "required": true,
+      "example": "pplx-..."
+    }
+  ],
+  "ports": [],
+  "healthCheck": {
+    "command": "echo 'Perplexity MCP server configured'"
+  },
+  "docs": [
+    {
+      "title": "Perplexity Ask MCP Server",
+      "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/perplexity-ask"
+    },
+    {
+      "title": "Perplexity API Documentation",
+      "url": "https://docs.perplexity.ai/api-reference/introduction"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Deep web research and information gathering",
+      "Real-time information retrieval",
+      "Fact-checking and verification",
+      "Comprehensive topic exploration"
+    ],
+    "project": [
+      "Research MCP server capabilities and configurations",
+      "Gather latest documentation for server cards",
+      "Discover best practices for MCP implementations"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Superior to WebSearch for complex research queries",
+      "Access to up-to-date web information",
+      "Comprehensive search across multiple sources",
+      "AI-powered summarization of results",
+      "Supports conversational queries with system prompts"
+    ],
+    "cons": [
+      "Requires API key with rate limits",
+      "Costs associated with API usage",
+      "Dependent on external service availability"
+    ]
+  },
+  "systemPromptConfig": {
+    "description": "Perplexity-ask supports custom system prompts via the messages array",
+    "recommended": "You are a senior software developer assistant helping with practical MVP-level solutions. Focus on production-ready, maintainable code patterns and real-world implementation details. Prioritize working solutions over theoretical perfection.",
+    "usage": "Include system message as first element in messages array when calling perplexity_ask",
+    "example": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "Senior developer context for MVP solutions..."
+        },
+        {
+          "role": "user",
+          "content": "Your actual query here"
+        }
+      ]
+    }
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": [
+      "Complex research requiring multiple sources",
+      "Understanding new technologies or frameworks",
+      "Finding best practices and patterns",
+      "Researching error messages with context"
+    ],
+    "preferOverNative": [
+      "Use instead of WebSearch for research tasks",
+      "Use when WebFetch would require multiple calls",
+      "Use for synthesizing information from multiple sources"
+    ],
+    "fallbackToNative": [
+      "Use WebSearch if Perplexity API is down",
+      "Use WebFetch for specific documentation pages",
+      "Use Grep/Read for local code exploration"
+    ]
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 3,
+    "aiAgentRating": 4,
+    "ratingRationale": {
+      "human": "Moderate - Provides summarized answers with sources that humans can verify. Increases transparency by citing references, making it easier to validate AI's research.",
+      "agent": "High - Acts as a research assistant providing summarized, contextual answers. Reduces hallucination by grounding responses in current web data. Essential for understanding new technologies and finding solutions."
+    },
+    "bestPractices": [
+      "Always include system prompt for senior developer context",
+      "Use for complex research before implementation",
+      "Combine with memory to cache frequently needed information",
+      "Trust the summarized patterns and apply them directly"
+    ],
+    "humanRole": "Review sources and validate summarized conclusions",
+    "agentRole": "Primary research tool for technical questions and best practices",
+    "integrationSynergies": [
+      "Context7 for official docs + Perplexity for community solutions",
+      "Memory/OpenMemory to persist research findings",
+      "Sequential Thinking to plan research strategy",
+      "GitHub to verify implementation examples"
+    ]
+  }
+}

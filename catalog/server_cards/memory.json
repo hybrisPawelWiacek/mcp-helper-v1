@@ -1,0 +1,95 @@
+{
+  "id": "memory",
+  "name": "Official MCP Memory Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "docker",
+  "deploy": {
+    "kind": "docker",
+    "image": "mcp/memory",
+    "command": "docker",
+    "args": ["run", "-i", "-v", "claude-memory:/app/dist", "--rm", "mcp/memory"]
+  },
+  "envSchema": [],
+  "ports": [],
+  "healthCheck": {
+    "command": "docker volume inspect claude-memory > /dev/null 2>&1 && echo 'Memory volume exists' || echo 'Memory volume missing'"
+  },
+  "docs": [
+    {
+      "title": "MCP Memory Server",
+      "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory"
+    },
+    {
+      "title": "MCP Documentation",
+      "url": "https://modelcontextprotocol.io"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Persistent storage of knowledge graphs",
+      "Creating entities and relationships",
+      "Tracking project context and decisions",
+      "Building semantic memory networks"
+    ],
+    "project": [
+      "Track project progress and decisions",
+      "Store server card metadata and relationships",
+      "Remember configuration patterns",
+      "Maintain development context across sessions"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Official MCP implementation",
+      "Persistent storage with Docker volumes",
+      "Graph-based knowledge representation",
+      "No external API dependencies"
+    ],
+    "cons": [
+      "Requires Docker to be installed",
+      "Limited to local storage",
+      "No built-in backup mechanism"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": [
+      "ALWAYS save project state at milestones",
+      "Store design decisions and rationale",
+      "Track completed work and progress",
+      "Remember user preferences and context"
+    ],
+    "preferOverNative": [
+      "Use for persistent storage across sessions",
+      "Use instead of comments for decision tracking",
+      "Use to maintain context between conversations"
+    ],
+    "mandatory": [
+      "Save state when closing session",
+      "Save after completing major features",
+      "Save important discoveries or decisions"
+    ]
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 3,
+    "aiAgentRating": 5,
+    "ratingRationale": {
+      "human": "Moderate - Provides audit trail of AI decisions and progress. Humans can review what the agent remembered and why, helping validate its context understanding.",
+      "agent": "Essential - Enables persistent context across sessions. Critical for maintaining project state, tracking decisions, and avoiding repeated work. Extends effective context window."
+    },
+    "bestPractices": [
+      "Save project state at every major milestone",
+      "Create knowledge graph of entities and relationships",
+      "Store design decisions with rationale",
+      "Query memory before starting new sessions"
+    ],
+    "humanRole": "Review stored memories to understand AI's context and decisions",
+    "agentRole": "Persistent knowledge base - MANDATORY for session continuity",
+    "integrationSynergies": [
+      "Sequential Thinking decisions get persisted",
+      "Serena discoveries about codebase get saved",
+      "Perplexity/Context7 research gets cached",
+      "GitHub PR/issue context gets maintained"
+    ]
+  }
+}

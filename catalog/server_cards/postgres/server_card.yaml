@@ -1,0 +1,39 @@
+id: postgres
+name: PostgreSQL MCP
+status: active
+transports:
+  - http
+  - sse
+runtime: docker
+deploy:
+  kind: docker
+  image: postgres:16-alpine
+envSchema:
+  - name: POSTGRES_CONNECTION_STRING
+    description: PostgreSQL connection URL for project/local overrides
+    required: false
+    example: postgresql://user:pass@host.docker.internal:5432/db
+  - name: POSTGRES_PASSWORD
+    description: Password for local dockerized instance (if used)
+    required: false
+ports:
+  - 5432
+healthCheck:
+  command: psql "$POSTGRES_CONNECTION_STRING" -c 'SELECT 1' || true
+docs:
+  - title: MCP Servers Env Reference (canonical)
+    url: ../../../../docs/canonical/MCP_SERVERS_ENV_REFERENCE.md
+  - title: PostgreSQL Docker Image
+    url: https://hub.docker.com/_/postgres
+useCases:
+  generic:
+    - Main application database
+    - Reporting/analytics store
+  project:
+    - "<filled by CLI from prompts>"
+prosCons:
+  pros:
+    - Mature, widely supported SQL database
+    - Strong local + Docker workflows
+  cons:
+    - Requires careful secrets management

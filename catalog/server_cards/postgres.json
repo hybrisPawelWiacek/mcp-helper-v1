@@ -1,0 +1,120 @@
+{
+  "id": "postgres",
+  "name": "PostgreSQL MCP Server",
+  "version": "1.0.0",
+  "description": "MCP server for PostgreSQL database operations with read/write capabilities",
+  "author": "MCP Community",
+  "license": "MIT",
+  "runtime": "docker",
+  "status": "active",
+  "categories": ["database", "data-management"],
+  
+  "transports": {
+    "type": "stdio",
+    "runtime": "docker",
+    "dockerImage": "mcp/postgres"
+  },
+  
+  "deployment": {
+    "globalScope": true,
+    "projectScope": true,
+    "requirements": {
+      "docker": true,
+      "npm": false,
+      "python": false
+    }
+  },
+  
+  "envSchema": [
+    {
+      "name": "POSTGRES_CONNECTION_STRING",
+      "description": "PostgreSQL connection string",
+      "required": true,
+      "example": "postgresql://username:password@localhost:5432/dbname",
+      "sensitive": true
+    },
+    {
+      "name": "DATABASE_URI",
+      "description": "Alternative to POSTGRES_CONNECTION_STRING",
+      "required": false,
+      "example": "postgresql://username:password@localhost:5432/dbname",
+      "sensitive": true
+    }
+  ],
+  
+  "configTemplate": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "mcp/postgres",
+      "${POSTGRES_CONNECTION_STRING}"
+    ],
+    "env": {
+      "POSTGRES_CONNECTION_STRING": "${POSTGRES_CONNECTION_STRING}"
+    }
+  },
+  
+  "useCases": {
+    "generic": [
+      "Database query execution and management",
+      "Schema inspection and modification",
+      "Data migration and transformation"
+    ],
+    "project": [
+      "Test database management",
+      "Data seeding and fixtures",
+      "Database performance analysis"
+    ]
+  },
+  
+  "pros": [
+    "Full PostgreSQL query capabilities",
+    "Support for complex transactions",
+    "Schema management features",
+    "Connection string flexibility"
+  ],
+  
+  "cons": [
+    "Requires database credentials",
+    "Network connectivity requirements",
+    "Docker overhead for simple queries"
+  ],
+  
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 3,
+    "ratingRationale": {
+      "human": "Essential for verifying data operations, reviewing query results, and ensuring database integrity",
+      "agent": "Useful for automated data management, but requires careful credential handling"
+    },
+    "bestPractices": [
+      "Use read-only credentials when possible",
+      "Implement query result limits",
+      "Monitor query performance",
+      "Use transactions for data modifications"
+    ],
+    "integrationSynergies": [
+      "serena + postgres: Code-driven database migrations",
+      "memory + postgres: Persist schema learnings",
+      "sequentialthinking + postgres: Complex query planning"
+    ]
+  },
+  
+  "toolSelectionProtocol": {
+    "primaryUseCase": "Database operations",
+    "preferWhen": [
+      "Working with PostgreSQL databases",
+      "Need complex SQL queries",
+      "Schema inspection required"
+    ],
+    "avoidWhen": [
+      "Simple key-value storage needed",
+      "NoSQL operations required",
+      "Database not available"
+    ],
+    "fallbackTools": ["memory", "openmemory"],
+    "synergyTools": ["serena", "sequentialthinking"]
+  }
+}

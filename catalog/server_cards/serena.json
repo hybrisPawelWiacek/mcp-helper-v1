@@ -1,0 +1,104 @@
+{
+  "id": "serena",
+  "name": "Serena Semantic Code Analysis MCP Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "python",
+  "deploy": {
+    "kind": "native",
+    "command": "uvx",
+    "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server", "--context", "ide-assistant", "--project", "${SERENA_PROJECT_PATH}"]
+  },
+  "envSchema": [
+    {
+      "name": "SERENA_PROJECT_PATH",
+      "description": "Path to the project directory for semantic code analysis",
+      "required": true,
+      "example": "/path/to/your/project"
+    }
+  ],
+  "ports": [],
+  "healthCheck": {
+    "command": "echo 'Serena MCP server configured for project'"
+  },
+  "docs": [
+    {
+      "title": "Serena GitHub Repository",
+      "url": "https://github.com/oraios/serena"
+    },
+    {
+      "title": "Serena Documentation",
+      "url": "https://github.com/oraios/serena/blob/main/README.md"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Semantic code search across codebases",
+      "Understanding code relationships and dependencies",
+      "Finding symbol definitions and references",
+      "Code navigation and exploration"
+    ],
+    "project": [
+      "Analyze this mcp-servers-config codebase structure",
+      "Find and understand MCP server implementations",
+      "Navigate code relationships in the project",
+      "Perform semantic searches for specific patterns"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "PRIMARY TOOL for code navigation - use instead of Read/Grep",
+      "Powerful semantic understanding of code",
+      "Language-agnostic code analysis",
+      "Efficient symbol-based navigation",
+      "Memory management for large codebases"
+    ],
+    "cons": [
+      "Requires Python and uv package manager",
+      "Initial indexing can take time for large projects",
+      "Limited to local filesystem access"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": [
+      "ALL code navigation in this project",
+      "Finding symbol definitions and usages",
+      "Understanding code structure and relationships",
+      "Semantic pattern searching"
+    ],
+    "preferOverNative": [
+      "ALWAYS use instead of Read for code exploration",
+      "ALWAYS use instead of Grep for code search",
+      "Use get_symbols_overview before reading entire files",
+      "Use find_symbol for precise navigation"
+    ],
+    "fallbackToNative": [
+      "Use Read for non-code files (JSON, MD, etc)",
+      "Use Grep for simple string searches in configs",
+      "Use Read for final verification after edits"
+    ],
+    "efficiency": "Serena is MORE efficient than Read/Grep for code - reads only necessary symbols, not entire files"
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 5,
+    "ratingRationale": {
+      "human": "High - Provides semantic understanding that humans can verify. Shows exact symbol locations and relationships, making code review more efficient. Helps humans understand AI's navigation decisions.",
+      "agent": "Essential - Primary tool for code understanding and navigation. Enables semantic edits and refactoring with precision. Dramatically reduces token usage by reading only necessary symbols instead of entire files."
+    },
+    "bestPractices": [
+      "ALWAYS use instead of Read/Grep for code exploration",
+      "Use get_symbols_overview first to understand file structure",
+      "Use find_symbol for precise navigation to specific functions/classes",
+      "Combine with memory to track codebase understanding"
+    ],
+    "humanRole": "Verify semantic understanding and validate refactoring decisions",
+    "agentRole": "PRIMARY code navigation and understanding tool - replaces traditional file reading",
+    "integrationSynergies": [
+      "Memory to persist codebase knowledge",
+      "Sequential Thinking to plan refactoring strategies",
+      "GitHub to commit semantic changes",
+      "Context7 to understand framework patterns before editing"
+    ]
+  }
+}

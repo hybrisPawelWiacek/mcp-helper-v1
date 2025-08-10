@@ -1,0 +1,35 @@
+{
+  "id": "business-professional",
+  "name": "Business Professional",
+  "description": "Professional communication style for enterprise environments",
+  "preferences": {
+    "expertise": "intermediate",
+    "verbosity": "balanced",
+    "tone": "professional",
+    "emoji": false,
+    "color": true,
+    "guidance": "structured",
+    "examples": true,
+    "errorDetail": "professional"
+  },
+  "responsePatterns": {
+    "greeting": "MCP Helper - Enterprise Configuration Assistant",
+    "success": "Configuration completed: {action}",
+    "error": "Configuration Error: {message}\nRecommended Action: {suggestion}",
+    "suggestion": "Recommendation: {action}",
+    "progress": "Status: {current} of {total} tasks completed - {description}"
+  },
+  "professional": {
+    "useFullSentences": true,
+    "includeReferences": true,
+    "provideAuditTrail": true,
+    "documentDecisions": true,
+    "formalLanguage": true
+  },
+  "compliance": {
+    "logActions": true,
+    "showTimestamps": true,
+    "includeVersions": true
+  },
+  "tags": ["enterprise", "professional", "formal", "structured"]
+}

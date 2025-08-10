@@ -1,0 +1,106 @@
+{
+  "id": "sequentialthinking",
+  "name": "Sequential Thinking MCP Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "docker",
+  "deploy": {
+    "kind": "docker",
+    "image": "mcp/sequentialthinking",
+    "command": "docker",
+    "args": ["run", "-i", "--rm", "mcp/sequentialthinking"]
+  },
+  "envSchema": [],
+  "ports": [],
+  "healthCheck": {
+    "command": "echo 'Sequential Thinking MCP server configured'"
+  },
+  "docs": [
+    {
+      "title": "Sequential Thinking MCP Server",
+      "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking"
+    },
+    {
+      "title": "Chain of Thought Documentation",
+      "url": "https://modelcontextprotocol.io/tools/sequentialthinking"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Breaking down complex problems into steps",
+      "Planning multi-step solutions",
+      "Systematic problem analysis",
+      "Iterative hypothesis testing and verification"
+    ],
+    "project": [
+      "Planning slash command implementation steps",
+      "Breaking down server card creation tasks",
+      "Analyzing complex MCP configuration requirements",
+      "Designing multi-phase development workflows"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Structured approach to complex problems",
+      "Supports iterative refinement",
+      "Maintains context across thinking steps",
+      "Can revise and branch thinking paths"
+    ],
+    "cons": [
+      "Requires Docker to be installed",
+      "May be verbose for simple tasks",
+      "Adds overhead for straightforward problems"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": [
+      "Deep reasoning WITHIN a specific TodoWrite task",
+      "Analyzing HOW to implement a complex feature",
+      "Working through multi-step logic when stuck",
+      "Hypothesis generation and verification for specific problems"
+    ],
+    "synergyWithTodoWrite": "Sequential Thinking works WITHIN TodoWrite tasks. TodoWrite manages the task list, Sequential Thinking provides deep reasoning for individual tasks.",
+    "whenToUse": [
+      "In PLAN MODE for feature planning before implementation",
+      "AFTER marking a TodoWrite task as in_progress",
+      "When a specific task requires deep analysis",
+      "For complex implementation planning within a task",
+      "When debugging requires systematic thinking"
+    ],
+    "whenNotToUse": [
+      "NEVER for creating task lists outside plan mode (use TodoWrite)",
+      "NEVER for general task tracking (use TodoWrite)",
+      "Not for simple, straightforward tasks"
+    ],
+    "planModeUsage": "In Claude Code's plan mode, Sequential Thinking is PRIMARY for planning implementation steps. Use with ExitPlanMode when ready to code.",
+    "benefits": [
+      "Prevents missed requirements within a task",
+      "Ensures systematic approach to complex problems",
+      "Documents thinking process for transparency",
+      "Works synergistically with TodoWrite"
+    ]
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 5,
+    "ratingRationale": {
+      "human": "High - Makes AI's reasoning transparent and auditable. Humans can see the step-by-step thinking process, making it easier to spot logical errors or missed requirements.",
+      "agent": "Essential - Critical for breaking down complex problems into manageable steps. Prevents the agent from rushing into implementation without proper planning. Enables systematic problem-solving."
+    },
+    "bestPractices": [
+      "Use WITHIN TodoWrite tasks for deep reasoning",
+      "Mark TodoWrite task as in_progress before using",
+      "Use for debugging complex issues systematically",
+      "Generate and verify hypotheses iteratively",
+      "Complete TodoWrite task after implementation"
+    ],
+    "humanRole": "Review reasoning steps within tasks and validate logical progression",
+    "agentRole": "Deep reasoning tool used WITHIN TodoWrite tasks - not for task management",
+    "integrationSynergies": [
+      "Serena to execute planned code navigation",
+      "Memory to persist planning decisions",
+      "Perplexity/Context7 to research during planning",
+      "GitHub to implement planned changes"
+    ]
+  }
+}

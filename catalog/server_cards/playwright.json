@@ -1,0 +1,112 @@
+{
+  "id": "playwright",
+  "name": "Playwright MCP Server",
+  "status": "active",
+  "description": "Multi-browser automation supporting Chrome, Firefox, and WebKit for testing and scraping",
+  "category": "automation",
+  "runtime": "node",
+  "transports": {
+    "stdio": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"]
+    }
+  },
+  "deployment": {
+    "npm": {
+      "package": "@modelcontextprotocol/server-playwright",
+      "install_type": "npx"
+    },
+    "docker": {
+      "image": "mcp/playwright",
+      "command": ["docker", "run", "-i", "--rm", "--init"],
+      "volumes": []
+    }
+  },
+  "environment_schema": {
+    "required": [],
+    "optional": {
+      "PLAYWRIGHT_BROWSER": {
+        "type": "string",
+        "description": "Browser to use: chromium, firefox, or webkit",
+        "default": "chromium",
+        "enum": ["chromium", "firefox", "webkit"]
+      },
+      "PLAYWRIGHT_HEADLESS": {
+        "type": "boolean",
+        "description": "Run browser in headless mode",
+        "default": true
+      },
+      "PLAYWRIGHT_TIMEOUT": {
+        "type": "number",
+        "description": "Default timeout in milliseconds for operations",
+        "default": 30000
+      }
+    }
+  },
+  "health_check": {
+    "method": "tool_call",
+    "tool": "browser_navigate",
+    "params": {
+      "url": "https://example.com"
+    }
+  },
+  "documentation": {
+    "official": "https://github.com/modelcontextprotocol/servers/tree/main/src/playwright",
+    "playwright_docs": "https://playwright.dev/docs/intro",
+    "setup_guide": "https://docs.modelcontextprotocol.io/servers/playwright"
+  },
+  "use_cases": [
+    "Cross-browser testing (Chrome, Firefox, Safari)",
+    "Mobile browser emulation and testing",
+    "Network interception and mocking",
+    "Auto-waiting for elements (built-in)",
+    "Parallel test execution",
+    "Video recording of test sessions",
+    "Accessibility testing and snapshots"
+  ],
+  "pros": [
+    "Multi-browser support (Chrome, Firefox, WebKit)",
+    "Better auto-waiting mechanisms than Puppeteer",
+    "Built-in mobile device emulation",
+    "Network interception capabilities",
+    "Faster execution with built-in parallelism",
+    "Better debugging tools and trace viewer",
+    "More reliable selectors (text, role, test-id)"
+  ],
+  "cons": [
+    "Larger installation size (all browsers)",
+    "Newer ecosystem than Puppeteer",
+    "Some browser-specific quirks",
+    "Resource intensive with multiple browsers",
+    "Learning curve for advanced features"
+  ],
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 5,
+    "rationale": {
+      "human": "High value - cross-browser testing visibility, trace viewer for debugging, video recordings for verification",
+      "agent": "Very high value - handles complex web automation across browsers, superior waiting and reliability for autonomous tasks"
+    },
+    "bestPractices": [
+      "Use auto-waiting instead of manual delays",
+      "Leverage role-based selectors for accessibility",
+      "Use browser contexts for isolation",
+      "Enable trace recording for debugging",
+      "Implement retry logic for flaky operations",
+      "Use network mocking to speed up tests"
+    ],
+    "integrationSynergies": [
+      "Superior to puppeteer for cross-browser needs",
+      "Combine with memory for test result persistence",
+      "Use with github-official for CI/CD integration",
+      "Pair with sequentialthinking for complex test scenarios",
+      "Complement firecrawl for hybrid scraping strategies"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primary": "For cross-browser testing and robust web automation",
+    "fallback": "puppeteer for Chrome-only scenarios, firecrawl for simple scraping",
+    "neverUse": "For simple static content extraction - use firecrawl",
+    "synergyWithTodoWrite": "Plan test scenarios in todos, execute with playwright"
+  }
+}

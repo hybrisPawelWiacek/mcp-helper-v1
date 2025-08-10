@@ -1,0 +1,61 @@
+{
+  "id": "brave-search",
+  "name": "Brave Search MCP Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "node",
+  "deploy": {
+    "kind": "npx",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-brave-search"]
+  },
+  "envSchema": [
+    {
+      "name": "BRAVE_API_KEY",
+      "description": "Brave Search API key for web and local search",
+      "required": true,
+      "example": "BSA..."
+    }
+  ],
+  "ports": [],
+  "healthCheck": {
+    "command": "echo 'Brave Search MCP server configured'"
+  },
+  "docs": [
+    {
+      "title": "Brave Search MCP Server",
+      "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search"
+    },
+    {
+      "title": "Brave Search API Documentation",
+      "url": "https://brave.com/search/api/"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Privacy-focused web search",
+      "Local business and place searches",
+      "News and current events retrieval",
+      "General information discovery"
+    ],
+    "project": [
+      "Find MCP server documentation and GitHub repos",
+      "Search for implementation examples",
+      "Discover user guides and tutorials",
+      "Research configuration best practices"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Privacy-focused search without tracking",
+      "Supports both web and local search",
+      "Fast response times",
+      "No ads in API responses"
+    ],
+    "cons": [
+      "Requires API key with usage limits",
+      "Less comprehensive than some competitors",
+      "Limited advanced search operators"
+    ]
+  }
+}

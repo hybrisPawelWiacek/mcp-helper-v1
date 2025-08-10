@@ -1,0 +1,29 @@
+{
+  "id": "balanced-friendly",
+  "name": "Balanced Friendly",
+  "description": "A balanced approach with clear explanations and friendly tone",
+  "preferences": {
+    "expertise": "intermediate",
+    "verbosity": "balanced",
+    "tone": "friendly",
+    "emoji": true,
+    "color": true,
+    "guidance": "moderate",
+    "examples": true,
+    "errorDetail": "balanced"
+  },
+  "responsePatterns": {
+    "greeting": "👋 Welcome! Let's configure your MCP servers.",
+    "success": "✅ {action} completed successfully!",
+    "error": "⚠️ Error: {message}\nSuggestion: {suggestion}",
+    "suggestion": "💡 {action}",
+    "progress": "Progress: {current}/{total} - {description}"
+  },
+  "balanced": {
+    "provideSummary": true,
+    "showImportantDetails": true,
+    "skipObvious": true,
+    "contextWhenNeeded": true
+  },
+  "tags": ["balanced", "friendly", "practical", "efficient"]
+}

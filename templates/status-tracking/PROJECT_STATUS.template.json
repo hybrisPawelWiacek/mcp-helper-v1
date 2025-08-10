@@ -1,0 +1,24 @@
+{
+  "project": "{{projectName}}",
+  "version": "1.0.0",
+  "overall_completion": 0,
+  "last_updated": "{{timestamp}}",
+  "features": {},
+  "todos": [],
+  "critical_notes": [],
+  "milestones": [],
+  "dependencies": {
+    "mcp_servers": [],
+    "npm_packages": [],
+    "external_apis": []
+  },
+  "team": {
+    "lead": "{{userName}}",
+    "contributors": []
+  },
+  "tracking": {
+    "use_weighted_completion": true,
+    "sync_with_memory": true,
+    "auto_update_claude_md": true
+  }
+}

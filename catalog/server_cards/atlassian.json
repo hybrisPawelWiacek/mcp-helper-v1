@@ -1,0 +1,148 @@
+{
+  "id": "atlassian",
+  "name": "Atlassian Integration",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "docker",
+  "deploy": {
+    "kind": "docker",
+    "image": "mcp/atlassian",
+    "command": "docker",
+    "args": [
+      "run",
+      "--rm",
+      "-i",
+      "-e",
+      "CONFLUENCE_URL=${CONFLUENCE_URL}",
+      "-e",
+      "CONFLUENCE_USERNAME=${CONFLUENCE_USERNAME}",
+      "-e",
+      "CONFLUENCE_API_TOKEN=${CONFLUENCE_API_TOKEN}",
+      "-e",
+      "JIRA_URL=${JIRA_URL}",
+      "-e",
+      "JIRA_USERNAME=${JIRA_USERNAME}",
+      "-e",
+      "JIRA_API_TOKEN=${JIRA_API_TOKEN}",
+      "mcp/atlassian"
+    ]
+  },
+  "envSchema": [
+    {
+      "name": "CONFLUENCE_URL",
+      "description": "Confluence instance URL (e.g., https://your-domain.atlassian.net/wiki)",
+      "required": false,
+      "example": "https://your-domain.atlassian.net/wiki"
+    },
+    {
+      "name": "CONFLUENCE_USERNAME",
+      "description": "Confluence username (typically your email)",
+      "required": false,
+      "example": "user@example.com"
+    },
+    {
+      "name": "CONFLUENCE_API_TOKEN",
+      "description": "Confluence API token from https://id.atlassian.com/manage-profile/security/api-tokens",
+      "required": false,
+      "example": "ATATT3xFfG..."
+    },
+    {
+      "name": "JIRA_URL",
+      "description": "Jira instance URL (e.g., https://your-domain.atlassian.net)",
+      "required": false,
+      "example": "https://your-domain.atlassian.net"
+    },
+    {
+      "name": "JIRA_USERNAME",
+      "description": "Jira username (typically your email)",
+      "required": false,
+      "example": "user@example.com"
+    },
+    {
+      "name": "JIRA_API_TOKEN",
+      "description": "Jira API token (often same as Confluence token)",
+      "required": false,
+      "example": "ATATT3xFfG..."
+    }
+  ],
+  "healthCheck": {
+    "command": "docker inspect mcp/atlassian >/dev/null 2>&1"
+  },
+  "docs": [
+    {
+      "title": "MCP Atlassian Server Documentation",
+      "url": "https://github.com/sooperset/mcp-atlassian"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Automate Jira issue creation and management",
+      "Manage Confluence documentation programmatically",
+      "Search and retrieve project information",
+      "Track sprint progress and team velocity",
+      "Generate reports from Jira data"
+    ],
+    "project": [
+      "Create issues directly from code comments",
+      "Update documentation based on code changes",
+      "Link pull requests to Jira tickets",
+      "Generate release notes from Jira",
+      "Sync project status with Confluence pages"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Comprehensive Atlassian ecosystem integration",
+      "Supports both Cloud and Server/Data Center",
+      "Rich query languages (JQL and CQL)",
+      "Bidirectional sync capabilities",
+      "Enterprise-grade project management"
+    ],
+    "cons": [
+      "Requires separate API tokens for each service",
+      "Subject to Atlassian API rate limits",
+      "Complex configuration for multiple projects",
+      "Docker overhead for simple operations",
+      "Limited bulk operation support"
+    ]
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 3,
+    "ratingRationale": {
+      "human": "Essential for team collaboration, project tracking, and documentation management",
+      "agent": "Useful for automated issue creation and documentation updates, but requires human oversight for project decisions"
+    },
+    "bestPractices": [
+      "Use JQL for complex issue searches instead of multiple API calls",
+      "Cache frequently accessed Confluence pages locally",
+      "Implement rate limiting to avoid API throttling",
+      "Use batch operations where available",
+      "Keep API tokens secure and rotate regularly"
+    ],
+    "integrationSynergies": [
+      "github-official: Link commits and PRs to Jira issues",
+      "slack: Send Jira notifications to team channels",
+      "memory: Cache project metadata and frequently accessed data",
+      "serena: Generate documentation from code analysis"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": "Project management and documentation operations",
+    "whenToUse": [
+      "Creating or updating Jira issues",
+      "Managing Confluence documentation",
+      "Tracking project progress",
+      "Generating reports from project data"
+    ],
+    "alternativeTo": {
+      "notion": "When using Atlassian ecosystem instead of Notion",
+      "github-official": "For project management vs code management"
+    },
+    "synergyWith": {
+      "github-official": "Link code changes to issues",
+      "slack": "Notify team of updates",
+      "memory": "Cache project data"
+    }
+  }
+}

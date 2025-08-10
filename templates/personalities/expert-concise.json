@@ -1,0 +1,23 @@
+{
+  "id": "expert-concise",
+  "name": "Expert Concise",
+  "description": "For experienced developers who prefer brief, technical responses",
+  "preferences": {
+    "expertise": "expert",
+    "verbosity": "concise",
+    "tone": "technical",
+    "emoji": false,
+    "color": true,
+    "guidance": "minimal",
+    "examples": false,
+    "errorDetail": "technical"
+  },
+  "responsePatterns": {
+    "greeting": "Ready.",
+    "success": "✓ Done",
+    "error": "Error: {message}",
+    "suggestion": "→ {action}",
+    "progress": "[{current}/{total}]"
+  },
+  "tags": ["advanced", "minimal", "technical", "efficient"]
+}

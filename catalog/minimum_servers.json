@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "description": "Minimum set of MCP servers required for custom server support",
+  "required": [
+    {
+      "id": "serena",
+      "name": "Serena",
+      "rationale": "Essential for semantic code understanding when analyzing custom MCP server implementations"
+    },
+    {
+      "id": "sequentialthinking",
+      "name": "Sequential Thinking",
+      "rationale": "Complex planning and reasoning for custom server integration strategies"
+    },
+    {
+      "id": "context7",
+      "name": "Context7",
+      "rationale": "Up-to-date framework documentation for technologies used by custom servers"
+    }
+  ],
+  "recommended": [
+    {
+      "id": "memory",
+      "name": "Memory (or OpenMemory)",
+      "rationale": "Persistent context storage for custom server configurations and learnings",
+      "alternatives": ["openmemory"]
+    },
+    {
+      "id": "perplexity-ask",
+      "name": "Perplexity Ask",
+      "rationale": "Research capabilities for finding custom server documentation and best practices"
+    },
+    {
+      "id": "github-official",
+      "name": "GitHub Official",
+      "rationale": "Access to custom server repositories, issues, and implementation examples"
+    }
+  ],
+  "validation": {
+    "minimumRequired": 3,
+    "message": "All 3 foundation servers (serena, sequentialthinking, context7) must be configured for custom server support",
+    "warningThreshold": 4,
+    "warningMessage": "Consider adding more recommended servers for better custom server integration capabilities"
+  }
+}

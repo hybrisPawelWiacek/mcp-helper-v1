@@ -1,0 +1,108 @@
+{
+  "id": "github-official",
+  "name": "GitHub Official MCP Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "docker",
+  "deploy": {
+    "kind": "docker",
+    "image": "ghcr.io/github/github-mcp-server",
+    "command": "docker",
+    "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN=${GITHUB_PERSONAL_ACCESS_TOKEN}", "ghcr.io/github/github-mcp-server"]
+  },
+  "envSchema": [
+    {
+      "name": "GITHUB_PERSONAL_ACCESS_TOKEN",
+      "description": "GitHub Personal Access Token with appropriate scopes",
+      "required": true,
+      "example": "ghp_..."
+    },
+    {
+      "name": "GITHUB_PAT",
+      "description": "Alternative environment variable for GitHub PAT",
+      "required": false,
+      "example": "ghp_..."
+    }
+  ],
+  "ports": [],
+  "healthCheck": {
+    "command": "echo 'GitHub MCP server configured'"
+  },
+  "docs": [
+    {
+      "title": "GitHub MCP Server Documentation",
+      "url": "https://github.com/github/github-mcp-server"
+    },
+    {
+      "title": "GitHub Personal Access Token Guide",
+      "url": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Repository management and exploration",
+      "Issue and pull request operations",
+      "Code search across repositories",
+      "GitHub API interactions"
+    ],
+    "project": [
+      "Explore MCP server repositories for implementation details",
+      "Check issues and pull requests for server projects",
+      "Search for configuration examples in repos",
+      "Analyze server implementation patterns"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Official GitHub integration",
+      "Comprehensive GitHub API coverage",
+      "Docker-based isolation for security",
+      "Supports all GitHub features"
+    ],
+    "cons": [
+      "Requires Docker to be installed",
+      "PAT needs appropriate scopes configured",
+      "Rate limits apply based on GitHub plan"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": [
+      "Exploring MCP server repositories",
+      "Checking issues and pull requests",
+      "Understanding implementation details",
+      "Getting latest repository information"
+    ],
+    "preferOverNative": [
+      "Use instead of WebFetch for GitHub content",
+      "Use instead of Bash(git clone) for exploration",
+      "Use for checking issues/PRs programmatically"
+    ],
+    "fallbackToNative": [
+      "Use Bash(git) for local repo operations",
+      "Use WebFetch if API rate limited",
+      "Use firecrawl for GitHub Pages sites"
+    ]
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 5,
+    "ratingRationale": {
+      "human": "High - Integrates AI work into standard PR workflow. All changes are reviewable through familiar GitHub interface. Creates audit trail of AI contributions.",
+      "agent": "Essential - Enables full participation in software development. Can read repos, create PRs, respond to reviews. Turns AI into a pseudo-contributor with accountability."
+    },
+    "bestPractices": [
+      "Always create branches, never commit to main",
+      "Write clear PR descriptions with rationale",
+      "Link commits to issues for traceability",
+      "Respond to review feedback iteratively"
+    ],
+    "humanRole": "Review PRs, provide feedback, approve changes through standard GitHub workflow",
+    "agentRole": "Autonomous contributor - reads code, creates PRs, responds to reviews",
+    "integrationSynergies": [
+      "Serena for understanding codebase before changes",
+      "Sequential Thinking to plan PR strategy",
+      "Slack to notify team of PRs",
+      "Atlassian to link with Jira issues"
+    ]
+  }
+}

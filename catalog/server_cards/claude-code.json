@@ -1,0 +1,112 @@
+{
+  "id": "claude-code",
+  "name": "Claude Code MCP Server",
+  "status": "active",
+  "description": "Official MCP server providing Claude Code's native tools as MCP endpoints",
+  "category": "development",
+  "runtime": "node",
+  "transports": {
+    "stdio": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/claude-code-mcp-server"]
+    }
+  },
+  "deployment": {
+    "npm": {
+      "package": "@anthropic/claude-code-mcp-server",
+      "install_type": "npx"
+    }
+  },
+  "environment_schema": {
+    "required": [],
+    "optional": {
+      "CLAUDE_CODE_PROJECT_PATH": {
+        "type": "string",
+        "description": "Path to the project directory",
+        "default": "."
+      },
+      "CLAUDE_CODE_MAX_FILE_SIZE": {
+        "type": "number",
+        "description": "Maximum file size to read in bytes",
+        "default": 1048576
+      }
+    }
+  },
+  "health_check": {
+    "method": "tool_call",
+    "tool": "list_directory",
+    "params": {
+      "path": "."
+    }
+  },
+  "documentation": {
+    "official": "https://docs.anthropic.com/en/docs/claude-code",
+    "api_reference": "https://github.com/anthropics/claude-code",
+    "mcp_integration": "https://docs.anthropic.com/en/docs/claude-code/mcp"
+  },
+  "exposed_tools": [
+    "Read - Read file contents",
+    "Write - Write file contents",
+    "Edit - Edit portions of files",
+    "MultiEdit - Multiple edits in one operation",
+    "Bash - Execute shell commands",
+    "Grep - Search file contents",
+    "Glob - Find files by pattern",
+    "LS - List directory contents",
+    "TodoWrite - Manage task lists",
+    "WebSearch - Search the web",
+    "WebFetch - Fetch web content"
+  ],
+  "use_cases": [
+    "Expose Claude Code tools to other MCP clients",
+    "Enable cross-tool integrations",
+    "Provide file system access via MCP",
+    "Execute commands through MCP protocol",
+    "Bridge Claude Code with external systems"
+  ],
+  "pros": [
+    "Official Anthropic implementation",
+    "Full access to Claude Code capabilities",
+    "Seamless integration with Claude Code CLI",
+    "Well-documented and supported",
+    "Enables tool composition patterns"
+  ],
+  "cons": [
+    "Redundant if already using Claude Code",
+    "May create circular dependencies",
+    "Limited value for Claude Code users",
+    "Primarily for external MCP clients"
+  ],
+  "agenticUsefulness": {
+    "humanVerificationRating": 2,
+    "aiAgentRating": 3,
+    "rationale": {
+      "human": "Low value - users already have these tools in Claude Code",
+      "agent": "Moderate value - enables tool bridging and external integrations"
+    },
+    "bestPractices": [
+      "Use for integrating Claude Code with external MCP systems",
+      "Avoid if already running within Claude Code",
+      "Consider for building MCP tool chains",
+      "Useful for testing MCP implementations"
+    ],
+    "integrationSynergies": [
+      "Bridge Claude Code tools to other MCP clients",
+      "Enable external systems to use Claude Code capabilities",
+      "Create tool composition workflows",
+      "Test MCP server implementations"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primary": "For exposing Claude Code tools to external MCP clients",
+    "fallback": "Use native Claude Code tools when available",
+    "neverUse": "Within Claude Code itself - use native tools",
+    "synergyWithTodoWrite": "Already integrated - TodoWrite is exposed"
+  },
+  "notes": [
+    "This server exposes Claude Code's native tools via MCP",
+    "Primarily useful for external MCP clients, not Claude Code users",
+    "Consider this a bridge/adapter pattern implementation",
+    "May be useful for testing or development of MCP integrations"
+  ]
+}

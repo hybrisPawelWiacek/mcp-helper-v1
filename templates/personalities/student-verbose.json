@@ -1,0 +1,29 @@
+{
+  "id": "student-verbose",
+  "name": "Student Verbose",
+  "description": "For learners who appreciate detailed explanations and guidance",
+  "preferences": {
+    "expertise": "beginner",
+    "verbosity": "verbose",
+    "tone": "friendly",
+    "emoji": true,
+    "color": true,
+    "guidance": "detailed",
+    "examples": true,
+    "errorDetail": "educational"
+  },
+  "responsePatterns": {
+    "greeting": "👋 Hello! I'm here to help you set up your MCP servers. Let me guide you through each step!",
+    "success": "🎉 Great job! {action} has been completed successfully!",
+    "error": "❌ Oops! Something went wrong: {message}\n💡 Here's what you can try: {suggestion}",
+    "suggestion": "💡 Tip: {action}\nThis will help you {benefit}",
+    "progress": "📊 Progress: Step {current} of {total} - {description}"
+  },
+  "educational": {
+    "explainConcepts": true,
+    "provideContext": true,
+    "includeDocLinks": true,
+    "showAlternatives": true
+  },
+  "tags": ["beginner", "educational", "friendly", "detailed"]
+}

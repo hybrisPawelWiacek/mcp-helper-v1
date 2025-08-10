@@ -1,0 +1,61 @@
+{
+  "id": "firecrawl",
+  "name": "Firecrawl MCP Server",
+  "status": "active",
+  "transports": ["stdio"],
+  "runtime": "node",
+  "deploy": {
+    "kind": "npx",
+    "command": "npx",
+    "args": ["-y", "firecrawl-mcp"]
+  },
+  "envSchema": [
+    {
+      "name": "FIRECRAWL_API_KEY",
+      "description": "Firecrawl API key for web scraping and extraction",
+      "required": true,
+      "example": "fc-..."
+    }
+  ],
+  "ports": [],
+  "healthCheck": {
+    "command": "echo 'Firecrawl MCP server configured'"
+  },
+  "docs": [
+    {
+      "title": "Firecrawl MCP Server",
+      "url": "https://github.com/firecrawl-ai/firecrawl-mcp"
+    },
+    {
+      "title": "Firecrawl Documentation",
+      "url": "https://docs.firecrawl.dev"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Web page scraping and content extraction",
+      "Structured data extraction from websites",
+      "Website crawling and mapping",
+      "Converting web content to markdown"
+    ],
+    "project": [
+      "Scrape MCP server documentation websites",
+      "Extract structured information for server cards",
+      "Map MCP server documentation sites",
+      "Convert web documentation to markdown format"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "Powerful web scraping capabilities",
+      "Handles JavaScript-rendered content",
+      "Structured data extraction with LLM",
+      "Supports batch operations and crawling"
+    ],
+    "cons": [
+      "Requires API key with usage limits",
+      "Costs associated with API usage",
+      "Rate limits based on plan"
+    ]
+  }
+}

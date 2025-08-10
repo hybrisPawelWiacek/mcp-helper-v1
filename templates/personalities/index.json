@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "description": "Pre-configured personality templates for MCP Helper",
+  "templates": [
+    {
+      "id": "expert-concise",
+      "file": "expert-concise.json",
+      "name": "Expert Concise",
+      "description": "Brief, technical responses for experienced developers",
+      "recommended_for": ["senior developers", "technical leads", "DevOps engineers"]
+    },
+    {
+      "id": "student-verbose",
+      "file": "student-verbose.json",
+      "name": "Student Verbose",
+      "description": "Detailed explanations and guidance for learners",
+      "recommended_for": ["beginners", "students", "junior developers", "career switchers"]
+    },
+    {
+      "id": "balanced-friendly",
+      "file": "balanced-friendly.json",
+      "name": "Balanced Friendly",
+      "description": "Clear explanations with a friendly, approachable tone",
+      "recommended_for": ["most users", "mid-level developers", "team environments"],
+      "default": true
+    },
+    {
+      "id": "business-professional",
+      "file": "business-professional.json",
+      "name": "Business Professional",
+      "description": "Formal communication for enterprise environments",
+      "recommended_for": ["enterprise teams", "corporate environments", "compliance-focused"]
+    },
+    {
+      "id": "hacker-minimal",
+      "file": "hacker-minimal.json",
+      "name": "Hacker Minimal",
+      "description": "Unix-style minimal output for terminal enthusiasts",
+      "recommended_for": ["system administrators", "terminal power users", "automation scripts"]
+    }
+  ],
+  "selection_guide": {
+    "by_experience": {
+      "beginner": ["student-verbose", "balanced-friendly"],
+      "intermediate": ["balanced-friendly", "business-professional"],
+      "expert": ["expert-concise", "hacker-minimal"]
+    },
+    "by_environment": {
+      "personal": ["balanced-friendly", "student-verbose", "hacker-minimal"],
+      "team": ["balanced-friendly", "expert-concise"],
+      "enterprise": ["business-professional", "balanced-friendly"]
+    },
+    "by_preference": {
+      "likes_details": ["student-verbose", "balanced-friendly"],
+      "likes_brevity": ["expert-concise", "hacker-minimal"],
+      "likes_structure": ["business-professional", "balanced-friendly"]
+    }
+  }
+}

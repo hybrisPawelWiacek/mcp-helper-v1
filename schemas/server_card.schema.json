@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ServerCard",
+  "type": "object",
+  "required": [
+    "id", "name", "status"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "status": { "type": "string", "enum": ["active", "deprecated", "not-recommended"] },
+    "transports": {
+      "oneOf": [
+        { "type": "array", "items": { "type": "string", "enum": ["http", "sse", "stdio"] } },
+        { "type": "object", "additionalProperties": true }
+      ]
+    },
+    "runtime": { "type": "string", "enum": ["node", "python", "docker", "npx", "uvx", "other"] },
+    "deploy": {
+      "type": "object",
+      "properties": {
+        "kind": { "type": "string", "enum": ["docker", "npx", "native", "uvx"] },
+        "image": { "type": "string" },
+        "command": { "type": "string" },
+        "args": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "envSchema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "required": { "type": "boolean", "default": false },
+          "example": { "type": "string" }
+        }
+      }
+    },
+    "ports": { "type": "array", "items": { "type": "integer" } },
+    "healthCheck": {
+      "type": "object",
+      "properties": {
+        "http": { "type": "string" },
+        "command": { "type": "string" }
+      }
+    },
+    "docs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "useCases": {
+      "type": "object",
+      "properties": {
+        "generic": { "type": "array", "items": { "type": "string" } },
+        "project": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "prosCons": {
+      "type": "object",
+      "properties": {
+        "pros": { "type": "array", "items": { "type": "string" } },
+        "cons": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "agenticUsefulness": {
+      "type": "object",
+      "properties": {
+        "humanVerificationRating": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "aiAgentRating": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "ratingRationale": {
+          "type": "object",
+          "properties": {
+            "human": { "type": "string" },
+            "agent": { "type": "string" }
+          }
+        },
+        "bestPractices": { "type": "array", "items": { "type": "string" } },
+        "humanRole": { "type": "string" },
+        "agentRole": { "type": "string" },
+        "integrationSynergies": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "toolSelectionProtocol": {
+      "type": "object",
+      "properties": {
+        "primaryUse": { 
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" } }
+          ]
+        },
+        "whenToUse": { "type": "array", "items": { "type": "string" } },
+        "whenNotToUse": { "type": "array", "items": { "type": "string" } },
+        "preferOverNative": { "type": "array", "items": { "type": "string" } },
+        "fallbackToNative": { "type": "array", "items": { "type": "string" } },
+        "alternativeTo": { "type": "object" },
+        "synergyWith": { "type": "object" },
+        "efficiency": { "type": "string" },
+        "benefits": { "type": "array", "items": { "type": "string" } },
+        "planModeUsage": { "type": "string" }
+      }
+    }
+  }
+}

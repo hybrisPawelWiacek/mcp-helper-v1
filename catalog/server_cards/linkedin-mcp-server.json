@@ -1,0 +1,126 @@
+{
+  "id": "linkedin-mcp-server",
+  "name": "LinkedIn MCP Server",
+  "status": "active",
+  "description": "LinkedIn profile and job data extraction via authenticated browser session",
+  "category": "social",
+  "runtime": "docker",
+  "transports": {
+    "stdio": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "LINKEDIN_EMAIL=${LINKEDIN_EMAIL}",
+        "-e",
+        "LINKEDIN_PASSWORD=${LINKEDIN_PASSWORD}",
+        "kimtaeyoon83/linkedin-mcp-server"
+      ]
+    }
+  },
+  "deployment": {
+    "docker": {
+      "image": "kimtaeyoon83/linkedin-mcp-server",
+      "environment": ["LINKEDIN_EMAIL", "LINKEDIN_PASSWORD"],
+      "volumes": []
+    }
+  },
+  "environment_schema": {
+    "required": {
+      "LINKEDIN_EMAIL": {
+        "type": "string",
+        "description": "LinkedIn account email for authentication",
+        "example": "user@example.com"
+      },
+      "LINKEDIN_PASSWORD": {
+        "type": "string",
+        "description": "LinkedIn account password",
+        "sensitive": true
+      }
+    },
+    "optional": {
+      "LINKEDIN_COOKIE": {
+        "type": "string",
+        "description": "Optional li_at cookie for session-based auth",
+        "sensitive": true
+      },
+      "PROXY_URL": {
+        "type": "string",
+        "description": "Proxy URL for avoiding rate limits",
+        "example": "http://proxy.example.com:8080"
+      }
+    }
+  },
+  "health_check": {
+    "method": "tool_call",
+    "tool": "get_person_profile",
+    "params": {
+      "linkedin_username": "williamhgates"
+    }
+  },
+  "documentation": {
+    "official": "https://github.com/kimtaeyoon83/linkedin-mcp-server",
+    "setup_guide": "https://github.com/kimtaeyoon83/linkedin-mcp-server#setup",
+    "api_reference": "https://github.com/kimtaeyoon83/linkedin-mcp-server#available-tools"
+  },
+  "use_cases": [
+    "Extract LinkedIn profile information",
+    "Search and analyze job postings",
+    "Get company information and employees",
+    "Retrieve recommended jobs",
+    "Professional network research",
+    "Talent sourcing and recruitment",
+    "Market research and competitor analysis"
+  ],
+  "pros": [
+    "Direct access to LinkedIn data",
+    "Supports profile and job extraction",
+    "Company information retrieval",
+    "Handles authentication automatically",
+    "Can use cookies for persistent sessions"
+  ],
+  "cons": [
+    "Requires LinkedIn credentials",
+    "Rate limiting concerns",
+    "Against LinkedIn ToS (use with caution)",
+    "May trigger account security checks",
+    "Limited to public profile data",
+    "Docker-only deployment"
+  ],
+  "agenticUsefulness": {
+    "humanVerificationRating": 2,
+    "aiAgentRating": 3,
+    "rationale": {
+      "human": "Low verification value - mostly data extraction, limited interaction visibility",
+      "agent": "Moderate value - useful for professional research, recruitment tasks, and network analysis"
+    },
+    "bestPractices": [
+      "Use dedicated LinkedIn account for automation",
+      "Implement rate limiting to avoid detection",
+      "Store extracted data in memory for reuse",
+      "Use proxy rotation for large-scale operations",
+      "Respect LinkedIn's rate limits and ToS"
+    ],
+    "integrationSynergies": [
+      "Combine with memory to cache profile data",
+      "Use with postgres to store extracted information",
+      "Pair with brave-search for additional company research",
+      "Integrate with github-official to match profiles with code contributions",
+      "Use sequentialthinking for complex recruitment workflows"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primary": "For LinkedIn-specific professional data extraction",
+    "fallback": "brave-search for public professional information",
+    "neverUse": "For general web scraping - use firecrawl or playwright",
+    "synergyWithTodoWrite": "Create recruitment pipeline tasks, use LinkedIn for candidate data"
+  },
+  "warnings": [
+    "Use of this server may violate LinkedIn's Terms of Service",
+    "Account suspension risk with aggressive scraping",
+    "Implement proper rate limiting and delays",
+    "Consider legal implications for data usage"
+  ]
+}

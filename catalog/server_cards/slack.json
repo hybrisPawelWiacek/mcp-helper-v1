@@ -1,0 +1,138 @@
+{
+  "id": "slack",
+  "name": "Slack MCP Server",
+  "version": "1.0.0",
+  "description": "MCP server for Slack integration - read messages, post updates, manage reactions",
+  "author": "ModelContextProtocol",
+  "license": "MIT",
+  "runtime": "npx",
+  "status": "active",
+  "categories": ["communication", "collaboration"],
+  
+  "transports": {
+    "type": "stdio",
+    "runtime": "npx",
+    "npmPackage": "@modelcontextprotocol/server-slack"
+  },
+  
+  "deployment": {
+    "globalScope": true,
+    "projectScope": true,
+    "requirements": {
+      "docker": false,
+      "npm": true,
+      "python": false
+    }
+  },
+  
+  "envSchema": [
+    {
+      "name": "SLACK_BOT_TOKEN",
+      "description": "Slack bot user OAuth token",
+      "required": true,
+      "example": "xoxb-YOUR-SLACK-BOT-TOKEN",
+      "sensitive": true
+    },
+    {
+      "name": "SLACK_TEAM_ID",
+      "description": "Slack workspace/team ID",
+      "required": true,
+      "example": "T01234567",
+      "sensitive": false
+    },
+    {
+      "name": "SLACK_CHANNEL_IDS",
+      "description": "Comma-separated list of channel IDs to monitor",
+      "required": false,
+      "example": "C01234567,C76543210",
+      "sensitive": false
+    }
+  ],
+  
+  "configTemplate": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@modelcontextprotocol/server-slack"
+    ],
+    "env": {
+      "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+      "SLACK_TEAM_ID": "${SLACK_TEAM_ID}",
+      "SLACK_CHANNEL_IDS": "${SLACK_CHANNEL_IDS}"
+    }
+  },
+  
+  "useCases": {
+    "generic": [
+      "Team notifications and alerts",
+      "Channel message monitoring",
+      "Automated status updates"
+    ],
+    "project": [
+      "Build status notifications",
+      "Deployment announcements",
+      "Team collaboration during incidents"
+    ]
+  },
+  
+  "pros": [
+    "Real-time team communication",
+    "Rich message formatting support",
+    "Thread and reaction management",
+    "Multi-channel support"
+  ],
+  
+  "cons": [
+    "Requires Slack app setup",
+    "Rate limiting considerations",
+    "Bot permissions complexity"
+  ],
+  
+  "agenticUsefulness": {
+    "humanVerificationRating": 5,
+    "aiAgentRating": 2,
+    "ratingRationale": {
+      "human": "Critical for team collaboration, notifications, and keeping humans in the loop",
+      "agent": "Limited use for autonomous agents, mainly for notifications"
+    },
+    "bestPractices": [
+      "Create dedicated bot channels",
+      "Use threads for related messages",
+      "Implement rate limiting awareness",
+      "Add emoji reactions for quick feedback"
+    ],
+    "integrationSynergies": [
+      "github-official + slack: PR/issue notifications",
+      "postgres + slack: Data alert notifications",
+      "sequentialthinking + slack: Progress updates"
+    ]
+  },
+  
+  "toolSelectionProtocol": {
+    "primaryUseCase": "Team communication and notifications",
+    "preferWhen": [
+      "Human collaboration needed",
+      "Team notifications required",
+      "Status updates for long tasks"
+    ],
+    "avoidWhen": [
+      "Sensitive data involved",
+      "High-frequency updates",
+      "No human monitoring"
+    ],
+    "fallbackTools": ["memory"],
+    "synergyTools": ["github-official", "atlassian"]
+  },
+  
+  "setupInstructions": {
+    "steps": [
+      "Create Slack app at https://api.slack.com/apps",
+      "Add OAuth scopes: channels:history, channels:read, chat:write, reactions:write, users:read",
+      "Install app to workspace",
+      "Copy bot token (xoxb-...)",
+      "Find team ID in workspace settings",
+      "Invite bot to channels"
+    ],
+    "documentation": "https://api.slack.com/authentication/oauth-v2"
+  }
+}

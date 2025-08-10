@@ -1,0 +1,132 @@
+{
+  "id": "docker-mcp-toolkit",
+  "name": "Docker MCP Toolkit",
+  "status": "active",
+  "description": "Gateway to multiple MCP servers via Docker including memory, filesystem, and more",
+  "category": "infrastructure",
+  "runtime": "docker",
+  "transports": {
+    "stdio": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "docker-mcp-toolkit:/data",
+        "docker-mcp-toolkit"
+      ]
+    }
+  },
+  "deployment": {
+    "docker": {
+      "image": "docker-mcp-toolkit",
+      "build_command": "docker build -t docker-mcp-toolkit .",
+      "volumes": ["docker-mcp-toolkit:/data"],
+      "environment": []
+    }
+  },
+  "environment_schema": {
+    "required": [],
+    "optional": {
+      "MCP_GATEWAY_PORT": {
+        "type": "number",
+        "description": "Port for the MCP gateway service",
+        "default": 3000
+      },
+      "ENABLED_SERVERS": {
+        "type": "string",
+        "description": "Comma-separated list of servers to enable",
+        "example": "memory,filesystem,fetch,math"
+      }
+    }
+  },
+  "health_check": {
+    "method": "container_status",
+    "container": "docker-mcp-toolkit"
+  },
+  "documentation": {
+    "official": "https://github.com/modelcontextprotocol/docker-mcp-toolkit",
+    "gateway_docs": "https://github.com/modelcontextprotocol/gateway",
+    "setup_guide": "https://docs.modelcontextprotocol.io/deployment/docker-toolkit"
+  },
+  "included_servers": [
+    {
+      "name": "memory",
+      "description": "Persistent memory storage via official MCP memory server",
+      "tools": ["create_memory", "retrieve_memory", "search_memory"]
+    },
+    {
+      "name": "filesystem",
+      "description": "File system operations within container",
+      "tools": ["read_file", "write_file", "list_directory"]
+    },
+    {
+      "name": "fetch",
+      "description": "HTTP client for API calls",
+      "tools": ["fetch_url", "post_data"]
+    },
+    {
+      "name": "math",
+      "description": "Mathematical computations",
+      "tools": ["calculate", "solve_equation"]
+    }
+  ],
+  "use_cases": [
+    "Unified access to multiple MCP servers",
+    "Persistent memory across sessions",
+    "Sandboxed file operations",
+    "API integrations via fetch",
+    "Mathematical computations",
+    "Gateway pattern for MCP services"
+  ],
+  "pros": [
+    "Multiple servers in one container",
+    "Simplified deployment and management",
+    "Persistent storage via Docker volumes",
+    "Gateway pattern reduces complexity",
+    "Good for testing MCP integrations",
+    "Includes official memory server"
+  ],
+  "cons": [
+    "Additional abstraction layer",
+    "Potential performance overhead",
+    "Complex debugging with multiple services",
+    "Requires Docker knowledge",
+    "May conflict with individual server setups"
+  ],
+  "agenticUsefulness": {
+    "humanVerificationRating": 3,
+    "aiAgentRating": 4,
+    "rationale": {
+      "human": "Moderate value - provides unified interface but adds complexity for debugging",
+      "agent": "High value - simplifies access to multiple tools, especially memory persistence"
+    },
+    "bestPractices": [
+      "Use for development and testing environments",
+      "Monitor resource usage with multiple servers",
+      "Configure only needed servers via ENABLED_SERVERS",
+      "Regular backup of Docker volumes",
+      "Use gateway pattern for service orchestration"
+    ],
+    "integrationSynergies": [
+      "Alternative to standalone memory/openmemory servers",
+      "Can replace multiple individual server installations",
+      "Works well with docker-compose orchestration",
+      "Combine with postgres for structured data storage",
+      "Gateway pattern complements microservices architecture"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primary": "For unified MCP server access in Docker environments",
+    "fallback": "Individual server installations for production",
+    "neverUse": "When you need fine-grained control over individual servers",
+    "synergyWithTodoWrite": "Use for development environment setup tasks"
+  },
+  "notes": [
+    "This is a meta-server providing gateway to multiple MCP servers",
+    "Good alternative when individual server setup is complex",
+    "Consider for containerized development workflows",
+    "Memory server included is the official MCP implementation"
+  ]
+}

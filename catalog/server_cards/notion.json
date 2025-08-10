@@ -1,0 +1,121 @@
+{
+  "id": "notion",
+  "name": "Notion Integration",
+  "status": "active",
+  "version": "1.0.0",
+  "transports": {
+    "dockerImage": "mcp/notion",
+    "npmPackage": "@modelcontextprotocol/server-notion"
+  },
+  "runtime": "docker",
+  "deployment": {
+    "type": "docker",
+    "container": {
+      "image": "mcp/notion",
+      "tag": "latest",
+      "environment": [
+        "INTERNAL_INTEGRATION_TOKEN"
+      ]
+    }
+  },
+  "configTemplate": {
+    "command": "docker",
+    "args": [
+      "run",
+      "--rm",
+      "-i",
+      "-e",
+      "INTERNAL_INTEGRATION_TOKEN=${INTERNAL_INTEGRATION_TOKEN}",
+      "mcp/notion"
+    ],
+    "env": {
+      "INTERNAL_INTEGRATION_TOKEN": "${INTERNAL_INTEGRATION_TOKEN}"
+    }
+  },
+  "envSchema": [
+    {
+      "name": "INTERNAL_INTEGRATION_TOKEN",
+      "description": "Notion internal integration token from https://www.notion.so/my-integrations",
+      "required": true,
+      "example": "secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+  ],
+  "healthCheck": {
+    "type": "docker",
+    "command": "docker inspect mcp/notion >/dev/null 2>&1"
+  },
+  "documentation": {
+    "url": "https://github.com/makenotion/notion-mcp-server",
+    "description": "MCP server for Notion workspace integration"
+  },
+  "useCases": {
+    "generic": [
+      "Manage Notion pages and databases programmatically",
+      "Create and update documentation",
+      "Query and search Notion content",
+      "Manage user permissions and sharing",
+      "Build custom Notion workflows"
+    ],
+    "project": [
+      "Sync project documentation with code",
+      "Generate documentation from code analysis",
+      "Create knowledge bases from research",
+      "Build project wikis and runbooks",
+      "Track tasks and project status"
+    ]
+  },
+  "pros": [
+    "Full Notion API coverage",
+    "Real-time content synchronization",
+    "Rich content formatting support",
+    "Database operations and queries",
+    "Collaborative workspace management"
+  ],
+  "cons": [
+    "Requires explicit workspace permissions",
+    "Subject to Notion API rate limits",
+    "Docker overhead for operations",
+    "Complex permission management",
+    "Limited bulk operation support"
+  ],
+  "agenticUsefulness": {
+    "humanVerificationRating": 4,
+    "aiAgentRating": 3,
+    "ratingRationale": {
+      "human": "Excellent for collaborative documentation and knowledge management that humans regularly access",
+      "agent": "Good for automated documentation generation and content management, but requires careful permission setup"
+    },
+    "bestPractices": [
+      "Grant minimal required permissions to integration",
+      "Use database views for complex queries",
+      "Cache frequently accessed content locally",
+      "Implement rate limiting for API calls",
+      "Keep integration tokens secure and rotate regularly"
+    ],
+    "integrationSynergies": [
+      "serena: Generate documentation from code analysis",
+      "github-official: Sync documentation with code releases",
+      "memory: Cache Notion content for faster access",
+      "atlassian: Alternative documentation platform"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primaryUse": "Documentation and knowledge management",
+    "whenToUse": [
+      "Creating or updating documentation",
+      "Managing knowledge bases",
+      "Building project wikis",
+      "Collaborative content editing",
+      "Database operations on Notion data"
+    ],
+    "alternativeTo": {
+      "atlassian": "When using Notion instead of Confluence",
+      "memory": "For structured documentation vs raw memory"
+    },
+    "synergyWith": {
+      "serena": "Generate docs from code",
+      "github-official": "Link docs to releases",
+      "memory": "Cache content locally"
+    }
+  }
+}

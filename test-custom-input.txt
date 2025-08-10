@@ -1,0 +1,12 @@
+1
+test-custom-server
+Test Custom Server
+1.0.0
+This is a test custom server
+node
+["test-server.js"]
+y
+TEST_API_KEY
+my-test-key-123
+
+EOF < /dev/null

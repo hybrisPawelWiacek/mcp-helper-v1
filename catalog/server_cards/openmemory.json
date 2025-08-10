@@ -1,0 +1,131 @@
+{
+  "id": "openmemory",
+  "name": "OpenMemory MCP Server",
+  "version": "1.0.0",
+  "description": "Advanced memory server with embeddings, semantic search, and persistent storage",
+  "author": "OpenMemory AI",
+  "license": "MIT",
+  "runtime": "npx",
+  "status": "active",
+  "categories": ["memory", "knowledge-management"],
+  
+  "transports": {
+    "type": "stdio",
+    "runtime": "npx",
+    "npmPackage": "@openmemoryai/mcp"
+  },
+  
+  "deployment": {
+    "globalScope": true,
+    "projectScope": false,
+    "requirements": {
+      "docker": false,
+      "npm": true,
+      "python": false
+    }
+  },
+  
+  "envSchema": [
+    {
+      "name": "OPENAI_API_KEY",
+      "description": "OpenAI API key for embedding generation",
+      "required": true,
+      "example": "sk-...",
+      "sensitive": true
+    },
+    {
+      "name": "OPENMEMORY_DATA_PATH",
+      "description": "Path to store memory data",
+      "required": false,
+      "example": "~/mcp-data/openmemory",
+      "sensitive": false
+    }
+  ],
+  
+  "configTemplate": {
+    "command": "npx",
+    "args": [
+      "-y",
+      "@openmemoryai/mcp"
+    ],
+    "env": {
+      "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+      "OPENMEMORY_DATA_PATH": "${OPENMEMORY_DATA_PATH}"
+    }
+  },
+  
+  "useCases": {
+    "generic": [
+      "Persistent context across sessions",
+      "Semantic memory search",
+      "Knowledge graph building"
+    ],
+    "project": [
+      "Project documentation memory",
+      "Code pattern learning",
+      "Decision history tracking"
+    ]
+  },
+  
+  "pros": [
+    "Embedding-based semantic search",
+    "Better than basic memory server",
+    "Persistent storage",
+    "Rich query capabilities"
+  ],
+  
+  "cons": [
+    "Requires OpenAI API key",
+    "API costs for embeddings",
+    "Initial setup complexity"
+  ],
+  
+  "agenticUsefulness": {
+    "humanVerificationRating": 3,
+    "aiAgentRating": 5,
+    "ratingRationale": {
+      "human": "Useful for reviewing stored context and decisions",
+      "agent": "Essential for maintaining context across sessions and building knowledge"
+    },
+    "bestPractices": [
+      "Store project-specific patterns",
+      "Save decision rationales",
+      "Index code examples",
+      "Track error resolutions"
+    ],
+    "integrationSynergies": [
+      "serena + openmemory: Code pattern memory",
+      "sequentialthinking + openmemory: Decision tracking",
+      "github-official + openmemory: Issue resolution memory"
+    ]
+  },
+  
+  "toolSelectionProtocol": {
+    "primaryUseCase": "Persistent memory with semantic search",
+    "preferWhen": [
+      "Need persistent context",
+      "Semantic search required",
+      "Building knowledge base"
+    ],
+    "avoidWhen": [
+      "Simple key-value storage sufficient",
+      "No OpenAI API access",
+      "Temporary context only"
+    ],
+    "fallbackTools": ["memory"],
+    "synergyTools": ["serena", "sequentialthinking", "github-official"]
+  },
+  
+  "alternativeTo": ["memory"],
+  "preferredOver": ["memory"],
+  
+  "setupInstructions": {
+    "steps": [
+      "Get OpenAI API key from https://platform.openai.com",
+      "Set OPENAI_API_KEY environment variable",
+      "Configure data path for persistence",
+      "Initialize with first memory save"
+    ],
+    "documentation": "https://github.com/openmemoryai/mcp"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "context7",
+  "name": "Context7 MCP Server",
+  "status": "active",
+  "transports": ["http", "sse"],
+  "runtime": "other",
+  "deploy": {
+    "kind": "native",
+    "command": "https://mcp.context7.com/mcp"
+  },
+  "envSchema": [],
+  "ports": [],
+  "healthCheck": {
+    "http": "https://mcp.context7.com/health"
+  },
+  "docs": [
+    {
+      "title": "Context7 Documentation",
+      "url": "https://context7.com"
+    },
+    {
+      "title": "MCP Integration Guide",
+      "url": "https://mcp.context7.com/docs"
+    }
+  ],
+  "useCases": {
+    "generic": [
+      "Retrieve up-to-date library documentation",
+      "Access code examples and snippets",
+      "Get API references for frameworks",
+      "Find best practices and patterns"
+    ],
+    "project": [
+      "Fetch latest documentation for MCP server dependencies",
+      "Get framework documentation for Node.js libraries",
+      "Access API references for technologies used by servers",
+      "Find implementation examples for server configurations"
+    ]
+  },
+  "prosCons": {
+    "pros": [
+      "No API key required",
+      "Always up-to-date documentation",
+      "Covers wide range of libraries and frameworks",
+      "Fast response times with HTTP/SSE transport"
+    ],
+    "cons": [
+      "Limited to documentation retrieval",
+      "Coverage depends on library availability",
+      "May not have all niche libraries"
+    ]
+  },
+  "agenticUsefulness": {
+    "humanVerificationRating": 2,
+    "aiAgentRating": 5,
+    "ratingRationale": {
+      "human": "Limited - Primarily serves AI needs. Indirectly helps humans by ensuring AI uses correct, up-to-date APIs, making output more trustworthy.",
+      "agent": "Essential - Eliminates hallucination of non-existent APIs. Provides up-to-date documentation that overrides training cutoff. Critical for framework-heavy development."
+    },
+    "bestPractices": [
+      "Use before implementing any framework-specific code",
+      "Specify exact topics to avoid pulling excessive docs",
+      "Cache frequently used docs in memory",
+      "Trust official examples over general knowledge"
+    ],
+    "humanRole": "Cross-reference AI's API usage with known documentation",
+    "agentRole": "Live documentation source - prevents outdated API usage",
+    "integrationSynergies": [
+      "Perplexity for community solutions to complement official docs",
+      "Memory to cache retrieved documentation",
+      "Serena to apply documented patterns in code",
+      "Sequential Thinking to plan API usage"
+    ]
+  }
+}

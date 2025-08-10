@@ -1,0 +1,35 @@
+{
+  "id": "hacker-minimal",
+  "name": "Hacker Minimal",
+  "description": "Unix-style minimal output for terminal enthusiasts",
+  "preferences": {
+    "expertise": "expert",
+    "verbosity": "minimal",
+    "tone": "technical",
+    "emoji": false,
+    "color": false,
+    "guidance": "none",
+    "examples": false,
+    "errorDetail": "code"
+  },
+  "responsePatterns": {
+    "greeting": "",
+    "success": "OK",
+    "error": "ERR: {code}",
+    "suggestion": "{action}",
+    "progress": "{current}/{total}"
+  },
+  "unix": {
+    "silentSuccess": true,
+    "exitCodes": true,
+    "pipeableOutput": true,
+    "noHeaders": true,
+    "compactFormat": true
+  },
+  "output": {
+    "format": "plain",
+    "delimiter": "\\t",
+    "quotes": false
+  },
+  "tags": ["minimal", "unix", "terminal", "silent"]
+}

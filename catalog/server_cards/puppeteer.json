@@ -1,0 +1,109 @@
+{
+  "id": "puppeteer",
+  "name": "Puppeteer MCP Server",
+  "status": "active",
+  "description": "Browser automation via Puppeteer for web scraping, testing, and dynamic content interaction",
+  "category": "automation",
+  "runtime": "node",
+  "transports": {
+    "stdio": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+    }
+  },
+  "deployment": {
+    "npm": {
+      "package": "@modelcontextprotocol/server-puppeteer",
+      "install_type": "npx"
+    },
+    "docker": {
+      "image": "mcp/puppeteer",
+      "command": ["docker", "run", "-i", "--rm", "--init", "-e", "DOCKER_CONTAINER=true"],
+      "volumes": []
+    }
+  },
+  "environment_schema": {
+    "required": [],
+    "optional": {
+      "PUPPETEER_LAUNCH_OPTIONS": {
+        "type": "string",
+        "description": "JSON string controlling browser launch options (headless, proxy, etc.)",
+        "example": "{\"headless\":true,\"args\":[\"--no-sandbox\"]}"
+      },
+      "ALLOW_DANGEROUS": {
+        "type": "boolean",
+        "description": "Enable dangerous operations - use with caution in production",
+        "default": false
+      },
+      "DOCKER_CONTAINER": {
+        "type": "boolean",
+        "description": "Set to true when running inside Docker",
+        "default": false
+      }
+    }
+  },
+  "health_check": {
+    "method": "tool_call",
+    "tool": "puppeteer_navigate",
+    "params": {
+      "url": "https://example.com"
+    }
+  },
+  "documentation": {
+    "official": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+    "examples": "https://apidog.com/blog/puppeteer-mcp-server/",
+    "setup_guide": "https://glama.ai/mcp/servers/@merajmehrabi/puppeteer-mcp-server"
+  },
+  "use_cases": [
+    "Web scraping dynamic JavaScript content",
+    "Automated browser testing (E2E)",
+    "Screenshot generation and visual regression",
+    "Form filling and submission automation",
+    "PDF generation from web pages",
+    "Console log and network monitoring",
+    "Cookie and session management"
+  ],
+  "pros": [
+    "Full Chrome/Chromium automation capabilities",
+    "Handles JavaScript-heavy SPAs effectively",
+    "Extensive Puppeteer ecosystem support",
+    "Can run headless or headful modes",
+    "Direct JavaScript execution in page context",
+    "Robust element interaction APIs"
+  ],
+  "cons": [
+    "Resource intensive (CPU/memory)",
+    "Chrome-only (no Firefox/Safari)",
+    "Can trigger anti-bot measures",
+    "Version compatibility issues",
+    "Slower than direct HTTP requests",
+    "Security risks with ALLOW_DANGEROUS"
+  ],
+  "agenticUsefulness": {
+    "humanVerificationRating": 3,
+    "aiAgentRating": 4,
+    "rationale": {
+      "human": "Moderate value for verification - helps visualize what AI is doing on websites, good for debugging automation flows",
+      "agent": "High value for autonomous web tasks - enables AI to interact with dynamic sites, fill forms, extract rendered content"
+    },
+    "bestPractices": [
+      "Use headless mode for speed in production",
+      "Implement proper error handling for network failures",
+      "Add delays between actions to avoid bot detection",
+      "Use specific selectors rather than fragile XPath",
+      "Monitor resource usage with concurrent sessions"
+    ],
+    "integrationSynergies": [
+      "Pairs with firecrawl for comprehensive scraping (puppeteer for JS-heavy, firecrawl for static)",
+      "Use with memory to persist scraped data and session state",
+      "Combine with sequentialthinking for complex multi-step automation flows",
+      "Complement with brave-search for initial URL discovery"
+    ]
+  },
+  "toolSelectionProtocol": {
+    "primary": "When dealing with JavaScript-heavy sites that require interaction",
+    "fallback": "firecrawl for static content, WebFetch for simple pages",
+    "neverUse": "For simple static HTML - use firecrawl or WebFetch instead",
+    "synergyWithTodoWrite": "Create automation task list, use puppeteer within each task"
+  }
+}

@@ -31,7 +31,7 @@ async function init() {
       node: await checkNode(),
       python: await checkPython(),
       claudeConfig: await fs.pathExists(path.join(process.env.HOME, '.claude.json')),
-      projectEnv: await fs.pathExists(path.join(process.cwd(), '.env'))
+      projectEnv: await fs.pathExists(path.join(process.cwd(), '.env.mcp'))
     };
 
     console.log('Environment check:');
@@ -39,12 +39,12 @@ async function init() {
     console.log(`  Node.js: ${checks.node ? chalk.green('✓') : chalk.red('✗')} ${checks.node ? 'Available' : 'Not found'}`);
     console.log(`  Python/uv: ${checks.python ? chalk.green('✓') : chalk.red('✗')} ${checks.python ? 'Available' : 'Not found'}`);
     console.log(`  Global config: ${checks.claudeConfig ? chalk.green('✓') : chalk.red('✗')} ${checks.claudeConfig ? 'Found' : 'Not found'}`);
-    console.log(`  Project .env: ${checks.projectEnv ? chalk.green('✓') : chalk.red('✗')} ${checks.projectEnv ? 'Found' : 'Will create'}`);
+    console.log(`  Project .env.mcp: ${checks.projectEnv ? chalk.green('✓') : chalk.red('✗')} ${checks.projectEnv ? 'Found' : 'Will create'}`);
     console.log();
 
-    // Step 2: Create/update .env if needed
+    // Step 2: Create/update .env.mcp if needed
     if (!checks.projectEnv) {
-      console.log(chalk.yellow('📝 Creating .env file...'));
+      console.log(chalk.yellow('📝 Creating .env.mcp file...'));
       
       const envTemplate = `# MCP Helper - Project Environment Variables
 # Generated on ${new Date().toISOString()}
@@ -57,8 +57,8 @@ async function init() {
 # export PERPLEXITY_API_KEY="pplx-..."
 `;
       
-      await fs.writeFile(path.join(process.cwd(), '.env'), envTemplate);
-      console.log(chalk.green('✓ Created .env file'));
+      await fs.writeFile(path.join(process.cwd(), '.env.mcp'), envTemplate);
+      console.log(chalk.green('✓ Created .env.mcp file'));
       
       // Add to .gitignore if needed
       await ensureGitignore();
@@ -134,7 +134,7 @@ async function init() {
     console.log();
     console.log('Next steps:');
     console.log('1. Add MCP servers with: ' + chalk.cyan('/mcp-helper add <server-name>'));
-    console.log('2. Configure environment variables in ' + chalk.cyan('.env'));
+    console.log('2. Configure environment variables in ' + chalk.cyan('.env.mcp'));
     console.log('3. List configured servers with: ' + chalk.cyan('/mcp-helper list'));
     console.log('4. View server documentation in ' + chalk.cyan('CLAUDE.md'));
     console.log();
@@ -207,7 +207,7 @@ async function checkPython() {
 }
 
 /**
- * Ensure .env is in .gitignore
+ * Ensure .env.mcp is in .gitignore
  */
 async function ensureGitignore() {
   const gitignorePath = path.join(process.cwd(), '.gitignore');
@@ -219,10 +219,10 @@ async function ensureGitignore() {
       gitignore = await fs.readFile(gitignorePath, 'utf-8');
     }
     
-    if (!gitignore.includes('.env')) {
-      gitignore += '\n# MCP Helper\n.env\n.env.local\n';
+    if (!gitignore.includes('.env.mcp')) {
+      gitignore += '\n# MCP Helper\n.env.mcp\n.env.local\n';
       await fs.writeFile(gitignorePath, gitignore);
-      console.log(chalk.green('✓ Added .env to .gitignore'));
+      console.log(chalk.green('✓ Added .env.mcp to .gitignore'));
     }
   } catch (error) {
     console.warn(chalk.yellow('⚠️  Could not update .gitignore:'), error.message);

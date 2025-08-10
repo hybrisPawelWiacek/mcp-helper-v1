@@ -332,7 +332,7 @@ $ /mcp-helper add-custom
 ✅ Custom server added successfully!
 
 Next steps:
-1. Configure environment variables in .env
+1. Configure environment variables in .env.mcp
 2. Restart Claude Code
 3. Test with: /mcp list
 ```

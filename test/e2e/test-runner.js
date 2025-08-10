@@ -126,14 +126,14 @@ async function runTests() {
     });
 
     // Test: Init command
-    await runner.test('Init command creates .env file', async () => {
+    await runner.test('Init command creates .env.mcp file', async () => {
       const result = await runner.runCommand('init');
       assert(result.stdout.includes('Detected'), 'Should detect project type');
       
-      const envExists = await fs.access(path.join(runner.tempDir, '.env'))
+      const envExists = await fs.access(path.join(runner.tempDir, '.env.mcp'))
         .then(() => true)
         .catch(() => false);
-      assert(envExists, '.env file should be created');
+      assert(envExists, '.env.mcp file should be created');
     });
 
     // Test: List command

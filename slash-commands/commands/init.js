@@ -49,7 +49,7 @@ export default {
       
       return {
         message: '⚡ Quick setup complete!',
-        action: 'Run "source .env && claude" to start using MCP servers'
+        action: 'Run "source .env.mcp && claude" to start using MCP servers'
       };
     }
     
